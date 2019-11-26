@@ -166,3 +166,58 @@ FROM emp;
 
 SELECT empno, ename, comm, sal, COALESCE(comm, sal) coal_sal
 FROM emp;  
+
+--Funcion(null 실습 fn4)
+--emp테이블의 정보를 다음과 같이 조회하도록 쿼리를 작성하세요.
+
+SELECT empno, ename, mgr, 
+        NVL(mgr, 9999)mgr_n,
+        NVL2(mgr, mgr, 9999)mgr_n_2,
+        COALESCE(mgr, 9999) mgr_n_3
+FROM emp;
+
+
+--Funcion 실습 fn5
+users 테이블의 정보를 다음과 같이 조회되도록 쿼리를 작성하세요
+reg_dt가 null일 경우 sysdate를 적용
+
+SELECT userid, usernm, reg_dt, COALESCE(reg_dt, sysdate) n_reg_dt,
+        NVL(reg_dt, sysdate) nvl_reg_dt
+FROM users
+WHERE userid NOT IN ('brown');
+
+--condition
+--case
+--emp.job 컬럼을 기준으로
+-- 'SALESMAN'이면 sal *1.05를 적용한 값 리턴
+-- 'MANAGER'이면 sal * 1.10를 적용한 값 리턴
+-- 'PRESIDENT'이면 sal * 1.20를 적용한 값 리턴
+-- 위 3가지 직군이 아닐 경우 sal 리턴
+-- empno, ename, sal, 요율 적용한 급여 AS bouns
+
+SELECT empno, ename, job, sal,
+       CASE
+            WHEN job = 'SALEMANS' THEN sal * 1.05
+            WHEN job = 'MANAGER' THEN sal * 1.10
+            WHEN job = 'PRESIDENT' THEN sal * 1.20
+            ELSE sal
+       END bonus,
+       comm,
+       
+       --NULL처리 함수 사용하지 않고 CASE 절을 이용하여
+       --comm이 NULL일 경우 -10을 리턴하도록 구성
+       
+       SELECT empno, ename, job, sal,
+       CASE
+            WHEN comm IS NULL THEN -10
+            ELSE comm
+        END case_null    
+       FROM emp;
+       
+--DECODE
+SELECT empno, ename, job, sal,
+        DECODE(job, 'SALESMAN', sal*1.05,
+                    'MANGER', sal*1.10,
+                    'PRESIEDNT', sal*1.20, 
+                    sal)bouns
+FROM emp;                   
