@@ -180,7 +180,3 @@ FROM emp;
 UPDATE emp SET dname = 'MARKET SALES'
 WHERE dname = 'SALES';
 
---emp 테이블, dept테이블 조인
-SELECT ename, emp.deptno, dept.dname
-FROM emp, dept
-WHERE emp.deptno = dept.deptno;

@@ -200,9 +200,9 @@ SELECT empno, ename, job, sal,
             WHEN job = 'SALEMANS' THEN sal * 1.05
             WHEN job = 'MANAGER' THEN sal * 1.10
             WHEN job = 'PRESIDENT' THEN sal * 1.20
-            ELSE sal
-       END bonus,
-       comm,
+            ELSE sal * 1
+       END bonus
+       FROM emp;
        
        --NULL처리 함수 사용하지 않고 CASE 절을 이용하여
        --comm이 NULL일 경우 -10을 리턴하도록 구성
