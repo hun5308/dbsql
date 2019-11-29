@@ -159,7 +159,7 @@ FROM emp a JOIN dept b
 ON a.deptno = b.deptno
 ORDER BY deptno;
 
---join1
+--join01
 SELECT c.*
 FROM(SELECT a.empno, a.ename, b.deptno, b.dname
 FROM emp a, dept b
@@ -182,7 +182,7 @@ WHERE a.deptno = b.deptno
 AND a.deptno IN (10,30)
 ORDER BY empno;
 
---join2
+--join02
 SELECT c.*
 FROM(SELECT a.empno, a.ename, a.sal, b.deptno, b.dname
 FROM emp a JOIN dept b
@@ -190,21 +190,4 @@ ON a.deptno = b.deptno) c
 WHERE c.sal > 2500
 ORDER BY c.deptno;
 
---join3
-
-SELECT c.*
-FROM(SELECT a.empno, a.ename, a.sal, b.deptno, b.dname
-FROM emp a JOIN dept b
-ON a.deptno = b.deptno) c 
-WHERE c.sal > 2500 AND c.empno >7600
-ORDER BY c.deptno;
-
---join4
-
-SELECT c.*
-FROM(SELECT a.empno, a.ename, a.sal, b.deptno, b.dname
-FROM emp a JOIN dept b
-ON a.deptno = b.deptno) c 
-WHERE c.sal > 2500 AND c.empno >7600 AND dname = 'RESEARCH'
-ORDER BY c.deptno;
 
