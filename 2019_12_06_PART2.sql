@@ -89,3 +89,48 @@ CREATE TABLE dept_test(
 --INSERT ±¸¹® º¹»ç
 INSERT INTO dept_test VALUES(99, 'ddit', 'daejeon');
 INSERT INTO dept_test VALUES(99, '´ë´ö, '´ëÀü');
+
+--PRIMARY KET Á¦¾à : UNIQUE  + NOT NULL
+
+--UNIQE : ÇØ´ç Ä®·³¿¡ µ¿ÀÏÇÑ °ªÀÌ Áßº¹µÉ ¼ö ¾ø´Ù
+--        (ex : empÅ×ÀÌºíÀÇempno(»ç¹ø)
+--           deptÅ×ÀÌºíÀÇ deptno(ºÎ¼­¹øÈ£))
+--            ÇØ´ç ÄÃ·³¿¡ NULL°ªÀº µé¾î °¥ ¼ö ÀÖ´Ù
+        
+--NOT NULL : µ¥ÀÌÅÍ ÀÔ·Â½Ã ÇØ´ç ÄÃ·³¿¡ °ªÀÌ ¹Ýµå½Ã µé¾î¿Í¾ß ÇÑ´Ù
+
+-- ÄÃ·³ ·¹º§ÀÇ PRIMARY KEY Á¦¾à »ý¼º
+--¿À¶óÅ¬ÀÇ Á¦¾àÁ¶°Ç ÀÌ¸§À» ÀÓÀÇ·Î »ý¼º (SYS-C00701)
+CREATE TABLE dept_test(
+    detpno NUMBER(2) PRIMARY KEY,;
+
+--¿À¶óÅ¬ Á¦¾àÁ¶°ÇÀÇ ÀÌ¸§À» ÀÓÀÇ·Î ¸í¸í
+--PRIMARY KEY : pk_Å×ÀÌºí¸í
+CREATE TABLE dept_test(
+    detpno NUMBER(2) CONSTRAINT pk_dept_test PRIMARY KEY,;
+    
+--PAIRWISE : ½ÖÀÇ °³³ä
+--»ó´ÜÀÇ PRIMARY KEY Á¦¾à Á¶°ÇÀÇ °æ¿ì ÇÏ³ªÀÇ ÄÃ·³¿¡ Á¦¾àÁ¶°ÇÀ» »ý¼º
+--¿©·¯ ÄÄ·³À» º¹ÇÕÀ¸·Î PRIMARY KEY Á¦¾àÀ¸·Î »ý¼º ÇÒ ¼ö ÀÕµû
+--ÇØ´ç ¹æ¹ýÀº À§ÀÇ µÎ°¡Áö ¿¹½ÃÃ³·³ ÄÃ·³ ·¹º§¿¡¼­´Â »ý¼º ÇÒ ¼ö ¾ø´Ù
+-->TABLE LEVEL Á¦¾à Á¶°Ç »ý¼º
+
+--±âÁ¸¿¡ »ý¼ºÇÑ dept_test Å×ÀÌºí »èÁ¦ (drop)
+CREATE TABLE dept_test(
+    deptno NUMBER(2),
+    dname VARCHAR2(14),
+    loc VARCHAR2(13)), --¸¶Áö¸· ÄÃ·³ ¼±¾ðÈÄ ÄÄ¸¶ •û¸ÔÁö ¾Ê±â
+
+--deptno, dname ÄÃ·³ÀÌ ¯˜À»‹š µ¿ÀÏÇÑ(Áßº¹µÈ)µ¥ÀÌÅÍ·Î ÀÎ½Ä
+    CONSTRAINT pk_dept_test PRIMARY KEY(deptno, dname)
+    );
+    
+--ºÎ¼­¹øÈ£, ºÎ¼­ÀÌ¸§ ¼ø¼­½ÖÀ¸·Î Áßº¹ µ¥ÀÌÅÍ¸¦ °ËÁõ
+--¾Æ·¡ µÎ°³ÀÇ insert ±¸¹®Àº ºÎ¼­¹øÈ£´Â °°Áö¸¸
+--ºÎ¼­¸íÀº ´Ù¸£¹Ç·Î ¼­·Î ´Ù¸¥ µ¥ÀÌÅÍ·Î ÀÎ»è --> INSERT°¡´É
+INSERT INTO dept_test VALUES(99, 'ddit', 'daejeon');
+INSERT INTO dept_test VALUES(99, '´ë´ö, '´ëÀü');
+
+SELECT *
+FROM dept_test;
+
